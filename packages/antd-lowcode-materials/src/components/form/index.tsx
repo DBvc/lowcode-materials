@@ -1,7 +1,7 @@
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef, ComponentType } from 'react';
 import { Form as OriginalForm } from 'antd';
 
-import { withSingleFunctionChild } from '../../utils/hoc';
+import { withWrap } from '../../utils/hoc';
 
 class Form extends Component<any, any> {
   formRef = createRef<any>();
@@ -91,6 +91,32 @@ class Form extends Component<any, any> {
     </OriginalForm.Item>
   );
 };
+
+function withSingleFunctionChild(Comp: ComponentType<any>) {
+  return (props: any) => {
+    const { renderChildren } = props;
+
+    let node;
+    if (typeof renderChildren === 'function') {
+      console.log('case 1: ', renderChildren)
+      node = renderChildren;
+    }
+    if (
+      Array.isArray(renderChildren) &&
+      renderChildren.length === 1 &&
+      typeof renderChildren[0] === 'function'
+    ) {
+      console.log('case 2: ', renderChildren)
+      node = renderChildren[0];
+    }
+    console.log('render node: ', node, props)
+
+    if (node) {
+      return <Comp {...(props as any)}>{node}</Comp>;
+    }
+    return <div className='debug'>{renderChildren}</div>;
+  };
+}
 
 (Form as any).List = withSingleFunctionChild(OriginalForm.List);
 

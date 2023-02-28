@@ -21,6 +21,38 @@ export default {
       propType: 'object',
       setter: 'JsonSetter',
     },
+    {
+      name: 'children',
+      title: {
+        label: 'children',
+        tip: 'fuck',
+      },
+      propType: 'func',
+      setter: [
+        {
+          componentName: 'FunctionSetter',
+          props: {
+            template: 'renderItem(item,${extParams}){\n// 自定义渲染列表项\nreturn `item`;\n}',
+          },
+        },
+      ]
+    },
+    {
+      name: 'renderChildren',
+      title: {
+        label: 'renderChildren',
+        tip: 'fuck',
+      },
+      propType: 'func',
+      setter: [
+        {
+          componentName: 'FunctionSetter',
+          props: {
+            template: 'renderItem(item,${extParams}){\n// 自定义渲染列表项\nreturn `item`;\n}',
+          },
+        },
+      ]
+    },
   ],
   configure: {
     component: {

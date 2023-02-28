@@ -7,6 +7,7 @@ const Button: any = (props: any, ref: Ref<any>) => {
     // 解决低代码编辑器中按钮设置href属性造成按钮点击重定向问题
     innerProps.href = undefined;
   }
+  console.log('buttoN: ', props)
   return <OriginalButton {...props} {...innerProps} ref={ref} />;
 };
 export default forwardRef(Button);

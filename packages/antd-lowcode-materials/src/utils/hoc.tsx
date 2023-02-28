@@ -53,6 +53,7 @@ export function withSingleFunctionChild(Comp: ComponentType<any>) {
 
     let node;
     if (typeof children === 'function') {
+      console.log('case 1: ', children)
       node = children;
     }
     if (
@@ -60,13 +61,15 @@ export function withSingleFunctionChild(Comp: ComponentType<any>) {
       children.length === 1 &&
       typeof children[0] === 'function'
     ) {
+      console.log('case 2: ', children)
       node = children[0];
     }
+    console.log('render node: ', node, props)
 
     if (node) {
       return <Comp {...(props as any)}>{node}</Comp>;
     }
-    return <div>{children}</div>;
+    return <div className='debug'>{children}</div>;
   };
 }
 
